@@ -1,0 +1,215 @@
+#include<stdio.h>
+#include<stdlib.h>
+void main(){
+    struct node{
+        int data;
+        struct node*next;
+    };
+    struct node *head,*newnode,*temp;
+    head=NULL;
+//create
+    struct node *newnodeinsert(struct node*){
+    int val;
+    printf("enter -1 to end linked list\n");
+    printf("enter Data:\t");
+    scanf("%d",&val);
+    while(val!=-1){
+        newnode=(struct node*)malloc(sizeof(struct node));
+        newnode->data=val;
+        if(head==NULL){
+            newnode->next=NULL;
+            head=temp=newnode;
+        }else{
+            temp=head;
+            while(temp->next !=NULL){
+                temp=temp->next;
+         }
+            temp->next=newnode;
+            temp=newnode;
+    }
+    printf("enter the data:\n");
+    scanf("%d",&val);
+    }
+    return head;
+    }
+//insertatbeginning
+    struct node *insrtbegin(struct node*){
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("Enter data :\t");
+        scanf("%d",&newnode->data);
+        
+        if (head==NULL){
+            head=temp=newnode;
+        }
+        else{
+            newnode->next=head;
+            head=newnode;
+        }
+        return head;
+    }
+//insertatend
+struct node *insrtend(struct node*){
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("Enter data :\t");
+    scanf("%d",&newnode->data);
+    temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next=newnode;
+    newnode->next=NULL;
+}
+
+   
+struct node *insert_pos (struct node *start)
+{
+   int pos,num;
+   printf("Enter position to insert \n");
+   scanf("%d",&pos);
+   printf("Enter data \n");
+   scanf("%d",&num);
+
+   int count =0;
+   struct node *ptr, *prevptr;
+   ptr=head;
+   if(pos==0){
+    struct node *new_node=(struct node*) malloc (sizeof(struct node) ) ;
+    new_node->data=num;
+    new_node->next=start;
+    start=new_node;
+    return start;
+   }
+   else{
+    while(ptr!=NULL){
+        if(count==pos){
+            struct node *new_node=(struct node*) malloc (sizeof(struct node) ) ;
+            new_node->data=num;
+            prevptr->next=new_node;
+            new_node->next=ptr;
+            break;
+        }
+        else{
+            count++;
+            prevptr=ptr;
+            ptr=ptr->next;
+        }
+    }
+    if(ptr==NULL){
+        printf("Position not found \n");
+        
+    }
+    else printf("element inserted \n");
+
+    return start;
+   }
+
+   
+}
+//display
+    void display()
+    {
+        temp=head;
+        if(head==NULL){
+            printf("linked list is empty");
+        }
+        else{
+        while(temp!=NULL){
+            printf("%d \t ",temp->data);
+            
+            temp=temp->next;
+            
+        }
+        printf("\n");
+        }
+    }
+    
+//delete front
+struct node *delete_front(struct node*){
+    temp=head;
+    head=temp->next;
+    free(temp);
+    
+    return head;
+    
+}
+
+//delete end
+struct node *delete_end(struct node*){
+    struct node *preptr;
+    temp=head;
+    while(temp->next!=NULL){
+        preptr=temp;
+        temp=temp->next;
+    }
+    preptr->next=NULL;
+    free(temp);
+    return head;
+    
+}
+//delete_element
+struct node *delete_element(struct node*){
+    int element;
+    struct node *preptr;
+    printf("enter element:\n");
+    scanf("%d",&element);
+    temp=head;
+    while(temp->next!=0){
+        if(temp->data==element){
+            preptr->next=temp->next;
+            free(temp);
+            
+        }
+        preptr=temp;
+        temp=temp->next;
+    }
+    if(temp==NULL)
+        printf("element not found\n");
+    else
+        printf("Element deleted succesfully\n");
+    return head;
+}
+
+    int choice;
+    while(1){
+    
+    printf("1:createnode,2:insertbegin,3:insertend,4:insertelement,5:display,6:delete_front,7:delete_end,8:delete_element,9:exit\n");
+    printf("enter choice:\t ");
+    scanf("%d",&choice);
+    
+    switch(choice){
+        case 1:
+            newnodeinsert(head);
+            break;
+        case 2:
+            insrtbegin(head);
+            break;
+        case 3:
+            insrtend(head);
+            break;
+        case 4:
+            insert_pos(head);
+            break;
+            
+        case 5:
+            display();
+            break;
+        case 6:
+           delete_front(head);
+           break;
+        case 7:
+           delete_end(head);
+           break;
+        case 8:
+            delete_element(head);
+            break;
+        case 9:
+            return;
+            break;
+        default:printf("invalid choice:");
+            
+            }    
+        }
+    }
+    
+      
+
